@@ -1,24 +1,17 @@
-import { DataTool } from "divine-voxel-engine/Tools/Data/DataTool";
-import { VoxelMath } from "divine-voxel-engine/Math";
+import { Vector3 } from "divine-voxel-engine/Math/index.js";
+import { DataTool } from "divine-voxel-engine/Tools/Data/DataTool.js";
 import { DVP } from "../DivineVoxelPhysics.js";
 const ep = 0.001;
-const dt = new DataTool();
 export class EntityBase {
-    dataTool = dt;
+    dataTool = new DataTool();
     active = true;
-    //current position
-    position = VoxelMath.getVector3(0, 0, 0);
-    direction = VoxelMath.getVector3(0, 0, 0);
-    //previous position
-    previousPosiiton = VoxelMath.getVector3(0, 0, 0);
-    //dimensions
-    hitBox = { w: 0.8, h: 1.8, d: 0.8 };
-    speed = 0.01;
-    velocity = VoxelMath.getVector3(0, 0, 0);
     onGround = false;
-    veloctiy = VoxelMath.getVector3(0, 0, 0);
-    boundingBox = { w: 0, h: 0, d: 0 };
-    doCollision(colliderName, collisionData) { }
+    position = new Vector3(0, 0, 0);
+    previousPosiiton = new Vector3(0, 0, 0);
+    direction = new Vector3(0, 0, 0);
+    speed = 0.01;
+    velocity = new Vector3(0, 0, 0);
+    hitBox = { w: 0.8, h: 1.8, d: 0.8 };
     setPosition(x, y, z) {
         this.position.updateVector(x, y, z);
     }
@@ -36,8 +29,6 @@ export class EntityBase {
     applyVelocity() {
         this.position.addFromVec3(this.velocity);
     }
-    beforeUpdate() { }
-    afterUpdate() { }
     update() {
         if (!this.active)
             return;

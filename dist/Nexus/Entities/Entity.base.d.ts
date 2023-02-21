@@ -1,37 +1,27 @@
-import { DataTool } from "divine-voxel-engine/Tools/Data/DataTool";
-import { Vector3 } from "divine-voxel-engine/Math";
-export declare class EntityBase {
+import { Vector3 } from "divine-voxel-engine/Math/index.js";
+import { DataTool } from "divine-voxel-engine/Tools/Data/DataTool.js";
+import type { CollisionData } from "Types/index.js";
+export declare abstract class EntityBase {
     dataTool: DataTool;
     active: boolean;
+    onGround: boolean;
     position: Vector3;
-    direction: Vector3;
     previousPosiiton: Vector3;
+    direction: Vector3;
+    speed: number;
+    velocity: Vector3;
     hitBox: {
         w: number;
         h: number;
         d: number;
     };
-    speed: number;
-    velocity: Vector3;
-    onGround: boolean;
-    veloctiy: Vector3;
-    boundingBox: {
-        w: number;
-        h: number;
-        d: number;
-    };
-    doCollision(colliderName: string, collisionData: {
-        h: number;
-        nx: number;
-        ny: number;
-        nz: number;
-    }): void;
+    abstract doCollision(colliderName: string, collisionData: CollisionData): void;
     setPosition(x: number, y: number, z: number): void;
     syncPosition(position: Vector3): void;
     cachePosition(): void;
     setVelocity(x: number, y: number, z: number): void;
     applyVelocity(): void;
-    beforeUpdate(): void;
-    afterUpdate(): void;
+    abstract beforeUpdate(): void;
+    abstract afterUpdate(): void;
     update(): void;
 }

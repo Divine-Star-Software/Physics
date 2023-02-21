@@ -1,6 +1,6 @@
 {
   "name": "dve-plugins-phsycis",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A physics library for DVE. .",
   "type": "module",
   "main": "index.js",
